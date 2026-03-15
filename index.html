@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кофейни Тюмени  | Бары и рестораны Тюмени</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <div class="logo-icon"><i class="fas fa-mug-hot"></i></div>
+                <h1>Тюмень <span>Кофейни</span></h1>
+            </div>
+            <div class="city-selector">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Тюмень, Россия</span>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="container">
+        <div class="app-title">
+            <h2>Откройте для себя лучшие заведения Тюмени</h2>
+            <p>Найдите идеальное место для отдыха, работы или встречи с друзьями среди баров, ресторанов и кофеен города</p>
+        </div>
+        
+        <div class="layout">
+            <!-- Filters Section -->
+            <section class="filters">
+                <h3><i class="fas fa-filter"></i> Фильтр заведений</h3>
+                
+                <div class="category-filter">
+                    <h4>Тип заведения</h4>
+                    <div class="category-buttons">
+                        <button class="category-btn active" data-category="all">Все</button>
+                        <button class="category-btn" data-category="coffee">Кофейни</button>
+                        <button class="category-btn" data-category="restaurant">Рестораны</button>
+                        <button class="category-btn" data-category="bar">Бары</button>
+                    </div>
+                </div>
+                
+                <div class="rating-filter">
+                    <h4>Рейтинг</h4>
+                    <div class="rating-options">
+                        <div class="rating-option">
+                            <input type="radio" id="rating-all" name="rating" value="all" checked>
+                            <label for="rating-all">Любой рейтинг</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="rating-4" name="rating" value="4">
+                            <label for="rating-4">4.0+ звезд</label>
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="rating-45" name="rating" value="4.5">
+                            <label for="rating-45">4.5+ звезд</label>
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="additional-options">
+                    <h4>Дополнительно</h4>
+                    <div class="additional-option">
+                        <input type="checkbox" id="open-now" name="open-now">
+                        <label for="open-now">Сейчас открыто</label>
+                    </div>
+                    <div class="additional-option">
+                        <input type="checkbox" id="wifi" name="wifi">
+                        <label for="wifi">Есть Wi-Fi</label>
+                    </div>
+                </div>
+                
+                <button id="reset-filters" class="place-link" style="margin-top: 20px;">
+                    <i class="fas fa-redo"></i> Сбросить фильтры
+                </button>
+                
+                <div class="location-btn">
+                    <button id="get-location" class="place-link">
+                        <i class="fas fa-location-arrow"></i> Мое местоположение
+                    </button>
+                </div>
+            </section>
+            
+            <!-- Map Section -->
+            <section class="map-section">
+                <div class="map-header">
+                    <h3><i class="fas fa-map"></i> Карта Тюмени</h3>
+                    <div class="map-controls">
+                        <button id="zoom-in" class="map-control-btn"><i class="fas fa-search-plus"></i></button>
+                        <button id="zoom-out" class="map-control-btn"><i class="fas fa-search-minus"></i></button>
+                    </div>
+                </div>
+                <div class="map-container">
+                    <div class="loader" id="map-loader"></div>
+                    <div id="map"></div>
+                    <div id="results-counter" class="results-counter"></div>
+                </div>
+            </section>
+        </div>
+        
+        <!-- Places List -->
+        <section class="places-list">
+            <div class="places-header">
+                <h3>Лучшие заведения Тюмени</h3>
+                <div class="sort-options">
+                    <select id="sort-by">
+                        <option value="rating">По рейтингу</option>
+                        <option value="name">По названию</option>
+                        <option value="price">По цене</option>
+                    </select>
+                </div>
+            </div>
+            <div class="places-grid" id="places-container">
+                <!-- Places will be loaded here by JavaScript -->
+            </div>
+        </section>
+        
+        <!-- Statistics -->
+        <section class="statistics">
+            <h3><i class="fas fa-chart-bar"></i> Статистика</h3>
+            <div class="stats-container">
+                <div class="stat-item">
+                    <div class="stat-number" id="total-places">0</div>
+                    <div class="stat-label">Всего заведений</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="coffee-count">0</div>
+                    <div class="stat-label">Кофеен</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="restaurant-count">0</div>
+                    <div class="stat-label">Ресторанов</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="bar-count">0</div>
+                    <div class="stat-label">Баров</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="avg-rating">0.0</div>
+                    <div class="stat-label">Средний рейтинг</div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Тюмень Кофейная</h4>
+                    <p>Путеводитель по лучшим барам, ресторанам и кофейням города Тюмень. Найдите идеальное место для любого повода.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-vk"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Контакты</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> Тюмень, Россия</p>
+                    <p><i class="fas fa-phone"></i> +7 (3452) 123-456</p>
+                    <p><i class="fas fa-envelope"></i> info@tyumen-coffee.ru</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Полезные ссылки</h4>
+                    <a href="#" id="about-link">О проекте</a>
+                    <a href="#" id="add-place-link">Добавить заведение</a>
+                    <a href="#" id="advertise-link">Реклама на сайте</a>
+                    <a href="#" id="terms-link">Пользовательское соглашение</a>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Тюмень Кофейная. Все права защищены.</p>
+                <p class="api-credit">Используется <a href="https://yandex.ru/maps/" target="_blank">Яндекс.Карты API</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+<script src="https://api-maps.yandex.ru/2.1/?apikey=ваш_api_ключ&lang=ru_RU" type="text/javascript"></script>
+<script src="app.js"></script>
+</body>
+</html>
